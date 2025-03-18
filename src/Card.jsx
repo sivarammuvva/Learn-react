@@ -1,4 +1,3 @@
-import { use, useState } from "react";
 import "./App.css";
 export default function Card({
   name,
@@ -12,9 +11,9 @@ export default function Card({
     setPdData((prev) =>
       prev.map((item) => {
         if (item.id === id) {
-          return { ...prev, count: Math.max(0, prev - 1) };
+          return { ...item, count: Math.max(0, item.count - 1) };
         }
-        return prev;
+        return item;
       })
     );
   }
@@ -23,22 +22,22 @@ export default function Card({
     setPdData((prev) =>
       prev.map((item) => {
         if (item.id === id) {
-          return { ...prev, count: Math.max(0, prev + 1) };
+          return { ...item, count: Math.max(0, item.count + 1) };
         }
-        return prev;
+        return item;
       })
     );
   }
 
   function initCount() {
-    setPdData((prev) =>
-      prev.map((item) => {
+    setPdData((prev) => [
+      ...prev.map((item) => {
         if (item.id === id) {
-          return { ...prev, count: 1 };
+          return { ...item, count: 1 };
         }
-        return prev;
-      })
-    );
+        return item;
+      }),
+    ]);
   }
 
   return (
